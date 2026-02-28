@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-container">
+
+    <h2 class="welcome-text">Welcome, {{ session['username'] }}</h2>
+
+
+    <!-- FEATURE CARDS -->
+    <div class="dashboard-grid">
+
+        <div class="dash-card">
+            <h3>🧠 Take Quiz</h3>
+            <p>Attempt 10 cybersecurity questions.</p>
+            <a href="/quiz" class="dash-btn">Start Quiz</a>
+        </div>
+
+        <div class="dash-card">
+            <h3>🔐 Password Analyzer</h3>
+            <p>Check how strong your password is.</p>
+            <a href="/password-check" class="dash-btn">Check Now</a>
+        </div>
+
+        <div class="dash-card">
+            <h3>🌐 URL Checker</h3>
+            <p>Detect phishing or malicious links.</p>
+            <a href="/url-check" class="dash-btn">Scan URL</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

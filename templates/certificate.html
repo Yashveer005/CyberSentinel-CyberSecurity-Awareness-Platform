@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="certificate-wrapper">
+    <div class="certificate-card">
+
+        <div class="cert-header">
+            <h1 class="cert-logo">
+              <span class="logo-cyber">Cyber</span><span 
+             class="logo-sentinel">Sentinel</span>
+            </h1>
+            <p>Cyber Awareness Platform</p>
+        </div>
+
+        <h2 class="cert-title">Certificate of Achievement</h2>
+
+        <p>This is proudly presented to</p>
+
+        <h2 class="cert-name">{{ name }}</h2>
+
+        <p>for successfully completing the Cyber Security Quiz</p>
+
+        <h3 class="cert-score">Score: {{ score }}/10</h3>
+
+        <div class="cert-footer">
+            <p>Date: {{ date }}</p>
+            <p>Certificate ID: {{ cert_id }}</p>
+        </div>
+
+        <a href="/download-certificate" class="btn-primary">Download PDF</a>
+
+    </div>
+</div>
+
+{% endblock %}

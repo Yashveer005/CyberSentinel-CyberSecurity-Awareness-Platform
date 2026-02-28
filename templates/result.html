@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="result-container">
+
+    <div class="result-card">
+    <h2>Your Score</h2>
+    <div class="big-score">{{ score }}/10</div>
+
+    {% if passed %}
+        <p style="color:#00ff99;">🎉 Congratulations! You Passed!</p>
+        <a href="/certificate" class="btn-primary">Download Certificate</a>
+    {% else %}
+        <p style="color:#ff4d4d;">❌ You need at least 7 to pass.</p>
+    {% endif %}
+</div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="quiz-container">
+    <h2>Cyber Security Quiz</h2>
+
+    <div class="timer">
+        Time Left: <span id="time">10:00</span>
+    </div>
+
+    <form action="/submit-quiz"method="POST" id="quizForm">
+
+        {% for q in questions %}
+
+<div class="quiz-card">
+    <h3>Q{{ loop.index }}. {{ q[1] }}</h3>
+
+    <label>
+        <input type="radio" name="question_{{ q[0] }}" value="1">
+        {{ q[2] }}
+    </label><br>
+
+    <label>
+        <input type="radio" name="question_{{ q[0] }}" value="2">
+        {{ q[3] }}
+    </label><br>
+
+    <label>
+        <input type="radio" name="question_{{ q[0] }}" value="3">
+        {{ q[4] }}
+    </label><br>
+
+    <label>
+        <input type="radio" name="question_{{ q[0] }}" value="4">
+        {{ q[5] }}
+    </label>
+
+</div>
+
+{% endfor %}
+
+        <button type="submit" class="btn-primary">Submit Quiz</button>
+    </form>
+</div>
+
+<script>
+let time = 600; // 10 minutes
+
+let timer = setInterval(function() {
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("time").innerText =
+        minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+    if (time <= 0) {
+        clearInterval(timer);
+        document.getElementById("quizForm").submit();
+    }
+
+    time--;
+}, 1000);
+</script>
+
+{% endblock %}

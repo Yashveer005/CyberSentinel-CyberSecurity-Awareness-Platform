@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberSentinel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="/" class="{% if request.path=='/' %}active{% endif %}">Home</a>
+
+        {% if session.get("user_id") %}
+            <a href="/dashboard" class="{% if 'dashboard' in request.path %}active{% endif %}">Dashboard</a>
+            <a href="/quiz" class="{% if 'quiz' in request.path %}active{% endif %}">Quiz</a>
+            <a href="/password-check" class="{% if 'password' in request.path %}active{% endif %}">Password Check</a>
+            <a href="/url-check" class="{% if 'url' in request.path %}active{% endif %}">URL Checker</a>
+            <a href="/logout" class="logout-btn">Logout</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="main-content">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="footer">
+    © 2026 CyberSentinel | Cyber Awareness Platform
+</footer>
+
+<script>
+window.addEventListener("scroll", function() {
+    document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 20);
+});
+</script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

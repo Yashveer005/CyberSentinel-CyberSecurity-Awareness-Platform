@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="url-wrapper">
+
+    <div class="url-card">
+
+        <h2 class="url-title">
+            🔍 URL Phishing Checker
+        </h2>
+
+        <form method="POST" class="url-form">
+            <input type="text" name="url"
+                   placeholder="Enter full URL (example: google.com)"
+                   required>
+            <button type="submit" class="btn-primary">
+                Scan URL
+            </button>
+        </form>
+
+        {% if error %}
+        <div class="error-box">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        {% if result %}
+        <div class="result-box">
+            <h3>{{ result }}</h3>
+            <p>Risk Score: {{ score }}</p>
+
+            <div class="risk-bar">
+                <div class="risk-progress"
+                     data-score="{{ score }}"></div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

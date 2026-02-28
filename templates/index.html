@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero container">
+
+    <div class="hero-content">
+
+        <h1>
+            Welcome to 
+            <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>
+        </h1>
+
+        <p class="hero-desc">
+            Learn Cyber Security in a gamified way.
+            Take quizzes, test password strength, detect phishing URLs
+            and improve your digital safety skills.
+        </p>
+
+        <div class="hero-buttons">
+            {% if session.get("user_id") %}
+                <a href="/dashboard" class="btn-primary">Dashboard</a>
+                <a href="/quiz" class="btn-secondary">Start Quiz</a>
+            {% else %}
+                <a href="/register" class="btn-primary">Get Started</a>
+                <a href="/login" class="btn-secondary">Login</a>
+            {% endif %}
+        </div>
+
+        <!-- Live Status Box -->
+        <div class="terminal-box">
+    <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">system@cybersentinel</span>
+    </div>
+
+    <div class="terminal-body">
+        <p>> Initializing Firewall...</p>
+        <p>> Encrypting Connection...</p>
+        <p>> Scanning Threat Database...</p>
+        <p class="success">> Status: SYSTEM SECURE ✓</p>
+    </div>
+</div>
+
+<!-- Binary Canvas -->
+<canvas id="matrixCanvas"></canvas>
+
+</section>
+
+
+<!-- ===== LEADERBOARD ===== -->
+<section class="leaderboard container">
+    <h2>🏆 Top Cyber Warriors</h2>
+
+    <div class="leaderboard-card">
+        {% if leaderboard %}
+            <ol>
+                {% for player in leaderboard %}
+                    <li>
+                        <span>{{ player['username'] }}</span>
+                        <span>{{ player['score'] }} pts</span>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>No players yet.</p>
+        {% endif %}
+    </div>
+</section>
+
+
+<!-- ===== FEATURES ===== -->
+<section class="features container">
+
+    <h2>Core Features</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <h3>🧠 Cyber Quiz</h3>
+            <p>Interactive quizzes to test your cybersecurity knowledge.</p>
+            <a href="/quiz">Try Quiz</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔐 Password Analyzer</h3>
+            <p>Analyze password strength and get instant tips.</p>
+            <a href="/password-check">Check Password</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>🌐 URL Threat Scanner</h3>
+            <p>Scan suspicious URLs before clicking.</p>
+            <a href="/url-check">Scan URL</a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===== WHY CHOOSE SECTION (Restored) ===== -->
+<section class="why container">
+
+    <h2>Why Choose <span class="brand-highlight">CyberSentinel</span>?</h2>
+
+    <div class="why-grid">
+        <div class="why-card">✔ Beginner Friendly</div>
+        <div class="why-card">✔ Practical Learning</div>
+        <div class="why-card">✔ Real-world Cyber Concepts</div>
+        <div class="why-card">✔ Student-Centric Platform</div>
+    </div>
+
+</section>
+
+{% endblock %}
