@@ -11,21 +11,27 @@
 <body>
 
 <nav class="navbar">
-    <div class="logo">
-        <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>
-    </div>
-
     <div class="nav-links">
         <a href="/" class="{% if request.path=='/' %}active{% endif %}">Home</a>
-
+        
         {% if session.get("user_id") %}
             <a href="/dashboard" class="{% if 'dashboard' in request.path %}active{% endif %}">Dashboard</a>
+            
+            <a href="/tools" class="{% if 'tools' in request.path %}active{% endif %}">Cyber Tools</a>
+
+            <a href="/learning" class="{% if 'learning' in request.path %}active{% endif %}">Learning Hub</a>
+
             <a href="/quiz" class="{% if 'quiz' in request.path %}active{% endif %}">Quiz</a>
-            <a href="/password-check" class="{% if 'password' in request.path %}active{% endif %}">Password Check</a>
-            <a href="/url-check" class="{% if 'url' in request.path %}active{% endif %}">URL Checker</a>
+
+            <a href="/about" class="{% if 'about' in request.path %}active{% endif %}">About</a>
+
             <a href="/logout" class="logout-btn">Logout</a>
-        {% endif %}
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+         {% endif %}
     </div>
+             
 </nav>
 
 <div class="main-content">
@@ -33,7 +39,25 @@
 </div>
 
 <footer class="footer">
-    © 2026 CyberSentinel | Cyber Awareness Platform
+
+    <h3>
+        <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>
+    </h3>
+
+    <p>
+        Learn • Practice • Protect
+    </p>
+
+    <small>
+        Built with ❤️ using Flask, Python & SQLite
+    </small>
+
+    <br><br>
+
+    <small>
+        © 2026 CyberSentinel | Cyber Awareness Platform
+    </small>
+
 </footer>
 
 <script>

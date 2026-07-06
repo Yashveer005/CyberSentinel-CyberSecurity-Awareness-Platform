@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h1>#️⃣ SHA-256 Hash Generator</h1>
+
+    <p class="section-subtitle">
+        Generate a secure SHA-256 hash for your text.
+    </p>
+
+    <div class="tool-card">
+
+     <form method="POST">
+
+        <textarea
+            name="text"
+            rows="6"
+            placeholder="Enter your text here..."
+            style="width:80%; padding:15px; border-radius:10px;"></textarea>
+
+        <br><br>
+
+        <button type="submit" class="tool-btn">
+            Generate Hash
+        </button>
+
+    </form>
+
+    <br>
+
+    <textarea
+        rows="4"
+        readonly
+        style="width:80%; padding:15px; border-radius:10px;">{{ hash_result }}</textarea>
+    </div>
+</div>
+
+{% endblock %}

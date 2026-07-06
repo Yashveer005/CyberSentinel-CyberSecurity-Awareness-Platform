@@ -19,12 +19,21 @@
 
         <div class="hero-buttons">
             {% if session.get("user_id") %}
-                <a href="/dashboard" class="btn-primary">Dashboard</a>
-                <a href="/quiz" class="btn-secondary">Start Quiz</a>
+                <a href="/tools" class="btn-primary">🛠 Explore Tools</a>
+                <a href="/learning" class="btn-secondary">📚 Start Learning</a>
             {% else %}
-                <a href="/register" class="btn-primary">Get Started</a>
-                <a href="/login" class="btn-secondary">Login</a>
+                <a href="/register" class="btn-primary">🚀 Get Started</a>
+                <a href="/login" class="btn-secondary">🔑 Login</a>
             {% endif %}
+        </div>
+        <!-- Smart Search -->
+        <div class="smart-search">
+
+            <input type="text"
+                placeholder="🔍 Search tools, scams, articles... (e.g. phishing kya hota hai?)">
+
+            <button>Search</button>
+
         </div>
 
         <!-- Live Status Box -->
@@ -60,7 +69,7 @@
                 {% for player in leaderboard %}
                     <li>
                         <span>{{ player['username'] }}</span>
-                        <span>{{ player['score'] }} pts</span>
+                        <span>{{ player['xp'] }} xp</span>
                     </li>
                 {% endfor %}
             </ol>
@@ -70,30 +79,28 @@
     </div>
 </section>
 
+<section class="stats container">
 
-<!-- ===== FEATURES ===== -->
-<section class="features container">
+    <div class="stats-grid">
 
-    <h2>Core Features</h2>
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-            <h3>🧠 Cyber Quiz</h3>
-            <p>Interactive quizzes to test your cybersecurity knowledge.</p>
-            <a href="/quiz">Try Quiz</a>
+        <div class="stat-card">
+            <h2>12+</h2>
+            <p>Security Tools</p>
         </div>
 
-        <div class="feature-card">
-            <h3>🔐 Password Analyzer</h3>
-            <p>Analyze password strength and get instant tips.</p>
-            <a href="/password-check">Check Password</a>
+        <div class="stat-card">
+            <h2>200+</h2>
+            <p>Quiz Questions</p>
         </div>
 
-        <div class="feature-card">
-            <h3>🌐 URL Threat Scanner</h3>
-            <p>Scan suspicious URLs before clicking.</p>
-            <a href="/url-check">Scan URL</a>
+        <div class="stat-card">
+            <h2>15+</h2>
+            <p>Learning Articles</p>
+        </div>
+
+        <div class="stat-card">
+            <h2>100%</h2>
+            <p>Free Platform</p>
         </div>
 
     </div>
@@ -101,16 +108,166 @@
 </section>
 
 
-<!-- ===== WHY CHOOSE SECTION (Restored) ===== -->
+<!-- ===== FEATURES ===== -->
+<section class="features container">
+
+    <h2>🛠 Featured Security Tools</h2>
+
+    <div class="feature-grid">
+
+       <div class="feature-card">
+            <h3>🔐 Password Strength Analyzer</h3>
+            <p>Analyze password strength and receive security recommendations.</p>
+            <a href="/password-check" class="tool-btn">Open Tool</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>🌐 URL Safety Checker</h3>
+            <p>Check suspicious URLs for phishing indicators before visiting them.</p>
+            <a href="/url-check" class="tool-btn">Open Tool</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔑 Password Generator</h3>
+            <p>Generate strong, secure and random passwords instantly.</p>
+            <a href="/password-generator" class="tool-btn">Open Tool</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>#️⃣ SHA-256 Generator</h3>
+            <p>Generate secure cryptographic hashes for text and files.</p>
+            <a href="/sha256" class="tool-btn">Open Tool</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>📁 File Hash Checker</h3>
+            <p>Verify the integrity of files using cryptographic hashes.</p>
+            <a href="/file-hash" class="tool-btn">Open Tool</a>
+        </div>
+
+        <div class="feature-card">
+            <h3>🛠 Explore All Tools</h3>
+            <p>View all cybersecurity tools available in CyberSentinel.</p>
+            <a href="/tools">Explore Tools →</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Learning Hub ================= -->
+
+<section class="learning container">
+
+    <h2>📚 Learning Hub</h2>
+    <div class="title-divider">
+        <span></span>
+        <i class="fas fa-shield-alt"></i>
+        <span></span>
+    </div>
+    
+    <div class="learning-intro">
+        <i class="fas fa-shield-alt"></i><p>
+        Learn cybersecurity through easy guides, awareness content and practical knowledge.
+     Start your cybersecurity journey with our curated learning resources.</p>
+    </div>
+
+    <div class="learning-grid">
+
+        <div class="learning-card">
+            <h3>🎣 Phishing Awareness</h3>
+            <p>Learn how to identify phishing emails and fake websites.</p>
+            <a href="#" class="learn-btn">Explore →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>🚨 Scam Alerts</h3>
+            <p>Stay updated with the latest online scams and frauds.</p>
+            <a href="#" class="learn-btn">Explore →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>💡 Daily Security Tips</h3>
+            <p>Small daily tips to improve your cybersecurity habits.</p>
+            <a href="#" class="learn-btn">Explore →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>📖 Cyber Basics</h3>
+            <p>Start learning networking, passwords and cyber concepts.</p>
+            <a href="#" class="learn-btn">Explore →</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE ================= -->
+
 <section class="why container">
 
-    <h2>Why Choose <span class="brand-highlight">CyberSentinel</span>?</h2>
+    <h2>🚀 Why Choose <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>?</h2>
+
+    <p class="page-subtitle">
+        Everything you need to start your cybersecurity journey in one platform.
+        Learn, practice and improve your cyber skills through interactive tools
+        and hands-on experience.
+    </p>
 
     <div class="why-grid">
-        <div class="why-card">✔ Beginner Friendly</div>
-        <div class="why-card">✔ Practical Learning</div>
-        <div class="why-card">✔ Real-world Cyber Concepts</div>
-        <div class="why-card">✔ Student-Centric Platform</div>
+
+        <div class="why-card">
+
+            <div class="achievement-icon">🛡️</div>
+
+            <h3>Practical Security Tools</h3>
+
+            <p>
+                Practice with real cybersecurity tools including Password Analyzer,
+                URL Checker, DNS Lookup, File Hash Checker and more.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <div class="achievement-icon">📚</div>
+
+            <h3>Interactive Learning</h3>
+
+            <p>
+                Learn cybersecurity concepts through beginner-friendly lessons,
+                awareness articles and real-world examples.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <div class="achievement-icon">🏆</div>
+
+            <h3>Gamified Experience</h3>
+
+            <p>
+                Earn XP, level up, complete quizzes and unlock certificates while
+                improving your cybersecurity knowledge.
+            </p>
+
+        </div>
+
+        <div class="why-card">
+
+            <div class="achievement-icon">💼</div>
+
+            <h3>Career Ready Skills</h3>
+
+            <p>
+                Build practical cybersecurity skills useful for internships,
+                interviews, certifications and SOC Analyst roles.
+            </p>
+
+        </div>
+
     </div>
 
 </section>

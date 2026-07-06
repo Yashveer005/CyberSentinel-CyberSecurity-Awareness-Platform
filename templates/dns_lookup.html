@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+<h1>🌐 DNS Lookup</h1>
+
+<p class="section-subtitle">
+Find IP address of any website.
+</p>
+
+<div class="tool-card">
+
+<form method="POST">
+
+<input
+class="tool-input"
+type="text"
+name="domain"
+placeholder="example.com">
+
+<br><br>
+
+<button class="tool-btn">
+Lookup
+</button>
+
+</form>
+
+{% if ip %}
+
+<br><br>
+
+<input
+class="tool-input"
+readonly
+value="{{ ip }}">
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

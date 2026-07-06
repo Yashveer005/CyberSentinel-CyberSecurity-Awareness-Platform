@@ -1,10 +1,31 @@
 import sqlite3
 
 conn = sqlite3.connect("database.db")
-c = conn.cursor()
+cursor = conn.cursor()
 
-# Create questions table
-c.execute("""
+# ==========================
+# USERS TABLE
+# ==========================
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+
+    score INTEGER DEFAULT 0,
+    xp INTEGER DEFAULT 0,
+    level INTEGER DEFAULT 1,
+    quiz_count INTEGER DEFAULT 0,
+    certificates INTEGER DEFAULT 0
+)
+""")
+
+# ==========================
+# QUESTIONS TABLE
+# ==========================
+
+cursor.execute("""
 CREATE TABLE IF NOT EXISTS questions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     question TEXT NOT NULL,
@@ -16,230 +37,240 @@ CREATE TABLE IF NOT EXISTS questions (
 )
 """)
 
-# Sample 30 questions
-questions = [
+# ==========================
+# INSERT QUESTIONS
+# ==========================
 
-# Beginner
-("What does HTTPS stand for?",
-"HyperText Transfer Protocol Secure",
-"High Transfer Text Protocol Service",
-"Hyper Terminal Tracking Protection System",
-"None",
-"HyperText Transfer Protocol Secure"),
+cursor.execute("SELECT COUNT(*) FROM questions")
+count = cursor.fetchone()[0]
 
-("Which one is a strong password?",
-"password123",
-"Yash@2026Secure!",
-"12345678",
-"qwerty",
-"Yash@2026Secure!"),
+if count == 0:
 
-("Phishing attacks mainly try to steal?",
-"Hardware",
-"Personal Information",
-"RAM",
-"WiFi Signals",
-"Personal Information"),
+    questions = [
 
-("What is malware?",
-"Security Software",
-"Malicious Software",
-"Firewall Device",
-"Antivirus",
-"Malicious Software"),
+    # Beginner
 
-("Two-factor authentication provides?",
-"Double Password",
-"Extra Security Layer",
-"Faster Login",
-"Less Security",
-"Extra Security Layer"),
+    ("What does HTTPS stand for?",
+     "HyperText Transfer Protocol Secure",
+     "High Transfer Text Protocol Service",
+     "Hyper Terminal Tracking Protection System",
+     "None",
+     "HyperText Transfer Protocol Secure"),
 
-("Which of these is NOT malware?",
-"Virus",
-"Trojan",
-"Firewall",
-"Ransomware",
-"Firewall"),
+    ("Which one is a strong password?",
+     "password123",
+     "Yash@2026Secure!",
+     "12345678",
+     "qwerty",
+     "Yash@2026Secure!"),
 
-("Firewall is used to?",
-"Cook Food",
-"Block Unauthorized Access",
-"Store Files",
-"Hack Networks",
-"Block Unauthorized Access"),
+    ("Phishing attacks mainly try to steal?",
+     "Hardware",
+     "Personal Information",
+     "RAM",
+     "WiFi Signals",
+     "Personal Information"),
 
-("Safest WiFi encryption?",
-"WEP",
-"WPA2/WPA3",
-"Open Network",
-"None",
-"WPA2/WPA3"),
+    ("What is malware?",
+     "Security Software",
+     "Malicious Software",
+     "Firewall Device",
+     "Antivirus",
+     "Malicious Software"),
 
-("VPN hides?",
-"Internet Speed",
-"IP Address",
-"RAM",
-"Battery",
-"IP Address"),
+    ("Two-factor authentication provides?",
+     "Double Password",
+     "Extra Security Layer",
+     "Faster Login",
+     "Less Security",
+     "Extra Security Layer"),
 
-("Social engineering targets?",
-"Machines",
-"Humans",
-"Servers",
-"Switches",
-"Humans"),
+    ("Which of these is NOT malware?",
+     "Virus",
+     "Trojan",
+     "Firewall",
+     "Ransomware",
+     "Firewall"),
 
-# Intermediate
-("SQL Injection targets?",
-"Databases",
-"Monitor",
-"Keyboard",
-"RAM",
-"Databases"),
+    ("Firewall is used to?",
+     "Cook Food",
+     "Block Unauthorized Access",
+     "Store Files",
+     "Hack Networks",
+     "Block Unauthorized Access"),
 
-("Brute force attack tries?",
-"Random Passwords",
-"Social Media",
-"Firewall Bypass",
-"Encryption Keys",
-"Random Passwords"),
+    ("Safest WiFi encryption?",
+     "WEP",
+     "WPA2/WPA3",
+     "Open Network",
+     "None",
+     "WPA2/WPA3"),
 
-("Ransomware does?",
-"Encrypt Files",
-"Boost Speed",
-"Clean Disk",
-"Secure System",
-"Encrypt Files"),
+    ("VPN hides?",
+     "Internet Speed",
+     "IP Address",
+     "RAM",
+     "Battery",
+     "IP Address"),
 
-("XSS stands for?",
-"Cross Site Scripting",
-"Extra Secure System",
-"XML Security Service",
-"None",
-"Cross Site Scripting"),
+    ("Social engineering targets?",
+     "Machines",
+     "Humans",
+     "Servers",
+     "Switches",
+     "Humans"),
 
-("Zero-day vulnerability means?",
-"Already patched bug",
-"Unknown security flaw",
-"Expired license",
-"No threat",
-"Unknown security flaw"),
+    ("SQL Injection targets?",
+     "Databases",
+     "Monitor",
+     "Keyboard",
+     "RAM",
+     "Databases"),
 
-("Hashing is used for?",
-"Encrypt Passwords",
-"Delete Data",
-"Speed Internet",
-"Hide Files",
-"Encrypt Passwords"),
+    ("Brute force attack tries?",
+     "Random Passwords",
+     "Social Media",
+     "Firewall Bypass",
+     "Encryption Keys",
+     "Random Passwords"),
 
-("Symmetric encryption example?",
-"AES",
-"RSA",
-"HTTPS",
-"SSH",
-"AES"),
+    ("Ransomware does?",
+     "Encrypt Files",
+     "Boost Speed",
+     "Clean Disk",
+     "Secure System",
+     "Encrypt Files"),
 
-("Asymmetric encryption example?",
-"RSA",
-"AES",
-"MD5",
-"SHA1",
-"RSA"),
+    ("XSS stands for?",
+     "Cross Site Scripting",
+     "Extra Secure System",
+     "XML Security Service",
+     "None",
+     "Cross Site Scripting"),
 
-("Ethical hacking means?",
-"Illegal hacking",
-"Authorized security testing",
-"Gaming",
-"Data theft",
-"Authorized security testing"),
+    ("Zero-day vulnerability means?",
+     "Already patched bug",
+     "Unknown security flaw",
+     "Expired license",
+     "No threat",
+     "Unknown security flaw"),
 
-("MITM attack intercepts?",
-"Network communication",
-"CPU",
-"Hard disk",
-"Mouse",
-"Network communication"),
+    ("Hashing is used for?",
+     "Encrypt Passwords",
+     "Delete Data",
+     "Speed Internet",
+     "Hide Files",
+     "Encrypt Passwords"),
 
-# Advanced
-("Network scanning tool?",
-"Nmap",
-"Photoshop",
-"Excel",
-"Chrome",
-"Nmap"),
+    ("Symmetric encryption example?",
+     "AES",
+     "RSA",
+     "HTTPS",
+     "SSH",
+     "AES"),
 
-("Port 443 is used for?",
-"HTTP",
-"FTP",
-"HTTPS",
-"SMTP",
-"HTTPS"),
+    ("Asymmetric encryption example?",
+     "RSA",
+     "AES",
+     "MD5",
+     "SHA1",
+     "RSA"),
 
-("Digital signature ensures?",
-"Authentication & Integrity",
-"Speed",
-"Encryption only",
-"Storage",
-"Authentication & Integrity"),
+    ("Ethical hacking means?",
+     "Illegal hacking",
+     "Authorized security testing",
+     "Gaming",
+     "Data theft",
+     "Authorized security testing"),
 
-("IDS stands for?",
-"Intrusion Detection System",
-"Internal Data Server",
-"Internet Download Speed",
-"None",
-"Intrusion Detection System"),
+    ("MITM attack intercepts?",
+     "Network communication",
+     "CPU",
+     "Hard disk",
+     "Mouse",
+     "Network communication"),
 
-("Which attack floods server?",
-"DDoS",
-"Phishing",
-"SQL",
-"Spoofing",
-"DDoS"),
+    ("Network scanning tool?",
+     "Nmap",
+     "Photoshop",
+     "Excel",
+     "Chrome",
+     "Nmap"),
 
-("Privilege escalation means?",
-"Increasing salary",
-"Gaining higher access rights",
-"System shutdown",
-"VPN use",
-"Gaining higher access rights"),
+    ("Port 443 is used for?",
+     "HTTP",
+     "FTP",
+     "HTTPS",
+     "SMTP",
+     "HTTPS"),
 
-("SHA-256 is used for?",
-"Hashing",
-"Streaming",
-"WiFi",
-"VPN",
-"Hashing"),
+    ("Digital signature ensures?",
+     "Authentication & Integrity",
+     "Speed",
+     "Encryption only",
+     "Storage",
+     "Authentication & Integrity"),
 
-("Pen testing OS?",
-"Kali Linux",
-"Windows XP",
-"Mac Paint",
-"DOS",
-"Kali Linux"),
+    ("IDS stands for?",
+     "Intrusion Detection System",
+     "Internal Data Server",
+     "Internet Download Speed",
+     "None",
+     "Intrusion Detection System"),
 
-("Sandboxing means?",
-"Testing in isolated environment",
-"Game mode",
-"WiFi boost",
-"File sharing",
-"Testing in isolated environment"),
+    ("Which attack floods server?",
+     "DDoS",
+     "Phishing",
+     "SQL",
+     "Spoofing",
+     "DDoS"),
 
-("CIA Triad stands for?",
-"Confidentiality Integrity Availability",
-"Cyber Internet Access",
-"Control Inspect Attack",
-"None",
-"Confidentiality Integrity Availability")
+    ("Privilege escalation means?",
+     "Increasing salary",
+     "Gaining higher access rights",
+     "System shutdown",
+     "VPN use",
+     "Gaining higher access rights"),
 
-]
+    ("SHA-256 is used for?",
+     "Hashing",
+     "Streaming",
+     "WiFi",
+     "VPN",
+     "Hashing"),
 
-c.executemany("""
-INSERT INTO questions (question, option1, option2, option3, option4, answer)
-VALUES (?, ?, ?, ?, ?, ?)
-""", questions)
+    ("Pen testing OS?",
+     "Kali Linux",
+     "Windows XP",
+     "Mac Paint",
+     "DOS",
+     "Kali Linux"),
+
+    ("Sandboxing means?",
+     "Testing in isolated environment",
+     "Game mode",
+     "WiFi boost",
+     "File sharing",
+     "Testing in isolated environment"),
+
+    ("CIA Triad stands for?",
+     "Confidentiality Integrity Availability",
+     "Cyber Internet Access",
+     "Control Inspect Attack",
+     "None",
+     "Confidentiality Integrity Availability")
+
+    ]
+
+    cursor.executemany("""
+    INSERT INTO questions
+    (question, option1, option2, option3, option4, answer)
+    VALUES (?, ?, ?, ?, ?, ?)
+    """, questions)
 
 conn.commit()
 conn.close()
 
-print("Database created and questions inserted successfully!")
+print("✅ CyberSentinel database created successfully.")
+print("✅ Users table ready.")
+print("✅ Questions inserted.")

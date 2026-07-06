@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-container">
+
+    <h1>📄 File Hash Checker</h1>
+
+    <p class="section-subtitle">
+        Generate SHA-256 hash of any file.
+    </p>
+
+    <div class="tool-card">
+
+        <form method="POST" enctype="multipart/form-data">
+
+            <input
+                type="file"
+                name="file"
+                required>
+
+            <br><br>
+
+            <button type="submit" class="tool-btn">
+                Generate Hash
+            </button>
+
+        </form>
+
+        {% if hash_result %}
+
+        <br><br>
+
+        <textarea
+            rows="4"
+            readonly
+            style="width:80%;">{{ hash_result }}</textarea>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

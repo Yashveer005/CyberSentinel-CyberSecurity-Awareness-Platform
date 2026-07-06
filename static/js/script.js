@@ -97,3 +97,76 @@ if (canvas) {
         canvas.height = window.innerHeight;
     });
 }
+
+// ==========================
+// Password Generator
+// ==========================
+
+const generateBtn = document.getElementById("generateBtn");
+const copyBtn = document.getElementById("copyBtn");
+const passwordField = document.getElementById("generatedPassword");
+
+if(generateBtn){
+
+generateBtn.addEventListener("click", function(){
+
+let chars = "";
+
+if(document.getElementById("uppercase").checked)
+    chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+if(document.getElementById("lowercase").checked)
+    chars += "abcdefghijklmnopqrstuvwxyz";
+
+if(document.getElementById("numbers").checked)
+    chars += "0123456789";
+
+if(document.getElementById("symbols").checked)
+    chars += "!@#$%^&*()_+";
+
+if(chars === ""){
+    alert("Please select at least one character type.");
+    return;
+}
+const length = document.getElementById("length").value;
+
+let password = "";
+
+for(let i = 0; i < length; i++){
+
+    password += chars.charAt(
+        Math.floor(Math.random() * chars.length)
+    );
+
+}
+
+passwordField.value = password;
+
+});
+
+}
+const slider = document.getElementById("length");
+const lengthValue = document.getElementById("lengthValue");
+
+if(slider){
+
+    slider.oninput = function(){
+
+        lengthValue.innerHTML = this.value;
+
+    };
+
+}
+if(copyBtn){
+
+copyBtn.addEventListener("click", function(){
+
+passwordField.select();
+
+document.execCommand("copy");
+
+alert("Password Copied!");
+
+});
+
+}
