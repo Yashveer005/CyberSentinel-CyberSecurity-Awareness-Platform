@@ -118,4 +118,8 @@ https://www.linkedin.com/in/yashveer-singh-7a0b32347
 
 ## 📄 License
 
+<<<<<<< HEAD
 This project is licensed under the MIT License.
+=======
+This project is licensed under the MIT License.
+>>>>>>> 4824cc8c43504212e46239e5c65f34abade645b3
