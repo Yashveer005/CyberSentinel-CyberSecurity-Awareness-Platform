@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="tool-card dns-tool">
+
+    <div class="tool-header">
+
+        <h2>📧 Email Header Analyzer</h2>
+
+        <p class="tool-subtitle">
+            Analyze email headers to extract sender information,
+            authentication results and routing details.
+        </p>
+
+    </div>
+
+    <form method="POST" action="/email-header">
+
+        <div class="search-group">
+
+            <textarea
+                class="tool-input"
+                name="header"
+                rows="12"
+                placeholder="Paste complete email header here..."
+                required>{{ header }}</textarea>
+
+        </div>
+
+        <br>
+
+        <button
+            type="submit"
+            class="tool-btn">
+
+            🔍 Analyze Header
+
+        </button>
+
+    </form>
+
+    {% if error %}
+
+    <div class="error-box">
+
+        ⚠ {{ error }}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% if result %}
+
+<div class="dns-grid">
+
+{% for key, value in result.items() %}
+
+<div class="dns-card">
+
+    <div class="dns-header">
+
+        <h3>📧 {{ key }}</h3>
+
+    </div>
+
+    <div class="dns-item">
+
+        <span>{{ value }}</span>
+
+        <button
+            type="button"
+            class="copy-btn"
+            onclick="copyText('{{ value|e }}')">
+
+            📋
+
+        </button>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+<div id="toast" class="copy-toast">
+
+    ✅ Copied Successfully
+
+</div>
+
+<script>
+
+function copyText(text){
+
+    navigator.clipboard.writeText(text);
+
+    showToast();
+
+}
+
+function showToast(){
+
+    const toast = document.getElementById("toast");
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+
+</script>
+
+{% endif %}
+
+{% endblock %}

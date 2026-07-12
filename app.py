@@ -15,7 +15,10 @@ import re
 from urllib.parse import urlparse
 import secrets
 import string
-
+import dns.resolver
+import whois
+import requests
+import ipaddress
 app = Flask(__name__)
 app.secret_key = "CyberSentinel_2026"
 
@@ -677,30 +680,6 @@ def sha256():
         hash_result=hash_result
     )
 
-# ================= DNS LOOKUP =================
-
-@app.route("/dns-lookup", methods=["GET","POST"])
-def dns_lookup():
-
-    ip = ""
-
-    if request.method == "POST":
-
-        domain = request.form["domain"]
-
-        try:
-
-            ip = socket.gethostbyname(domain)
-
-        except:
-
-            ip = "Invalid Domain"
-
-    return render_template(
-        "dns_lookup.html",
-        ip=ip
-    )
-
 # ================= FILE HASH =================
 
 @app.route("/file-hash", methods=["GET","POST"])
@@ -960,6 +939,333 @@ def about():
 
     return render_template("about.html")
 
+
+    
+# ================= DNS LOOKUP =================
+@app.route("/dns-lookup", methods=["GET", "POST"])
+def dns_lookup():
+
+    print("DNS LOOKUP CALLED")
+
+    import dns.resolver
+
+    records = None
+    error = None
+    domain = ""
+
+    if request.method == "POST":
+
+        domain = request.form.get("domain", "").strip()
+
+        if domain:
+
+            try:
+
+                record_types = ["A", "AAAA", "MX", "NS", "TXT", "CNAME"]
+
+                records = {}
+
+                for record in record_types:
+
+                    try:
+
+                        answers = dns.resolver.resolve(domain, record)
+
+                        values = []
+
+                        for answer in answers:
+                            values.append(str(answer))
+
+                        records[record] = values
+
+                    except Exception:
+                        records[record] = []
+
+            except Exception:
+
+                error = "Unable to fetch DNS records. Please enter a valid domain."
+
+    return render_template(
+        "dns_lookup.html",
+        records=records,
+        error=error,
+        domain=domain
+    )
+
+# ================= WHOIS LOOKUP =================
+
+@app.route("/whois-lookup", methods=["GET", "POST"])
+def whois_lookup():
+
+    result = None
+    error = None
+    domain = ""
+
+    if request.method == "POST":
+
+        domain = request.form.get("domain", "").strip()
+
+        if domain:
+
+            try:
+
+                data = whois.whois(domain)
+
+                def clean(value):
+
+                    if isinstance(value, list):
+                        value = value[0] if value else None
+
+                    if isinstance(value, datetime):
+                        return value.strftime("%d-%m-%Y")
+
+                    if isinstance(value, set):
+                        return ", ".join(str(x) for x in value)
+
+                    if isinstance(value, list):
+                        return ", ".join(str(x) for x in value)
+
+                    if value is None:
+                        return "N/A"
+
+                    return str(value)
+
+                result = {
+
+                    "Domain": clean(data.domain_name),
+                    "Registrar": clean(data.registrar),
+                    "Creation Date": clean(data.creation_date),
+                    "Expiration Date": clean(data.expiration_date),
+                    "Updated Date": clean(data.updated_date),
+                    "Name Servers": clean(data.name_servers),
+                    "Status": clean(data.status),
+                    "Emails": clean(data.emails)
+
+                }
+
+            except Exception as e:
+
+                 if "returned no output" in str(e).lower():
+                     error = "Invalid domain or WHOIS data is unavailable."
+               
+
+    return render_template(
+        "whois_lookup.html",
+        result=result,
+        error=error,
+        domain=domain
+    )
+# ================= IP INTELLIGENCE =================
+@app.route("/ip-intelligence", methods=["GET", "POST"])
+def ip_intelligence():
+
+    result = None
+    error = None
+    target = ""
+
+    if request.method == "POST":
+
+        target = request.form.get("target", "").strip()
+
+        if target:
+
+            try:
+
+                response = requests.get(
+                    f"http://ip-api.com/json/{target}",
+                    timeout=10
+                )
+
+                data = response.json()
+
+                if data.get("status") == "success":
+
+                    result = {
+
+                        "IP Address": data.get("query", "N/A"),
+                        "Country": data.get("country", "N/A"),
+                        "Region": data.get("regionName", "N/A"),
+                        "City": data.get("city", "N/A"),
+                        "ZIP Code": data.get("zip", "N/A"),
+                        "ISP": data.get("isp", "N/A"),
+                        "Organization": data.get("org", "N/A"),
+                        "ASN": data.get("as", "N/A"),
+                        "Timezone": data.get("timezone", "N/A"),
+                        "Latitude": data.get("lat", "N/A"),
+                        "Longitude": data.get("lon", "N/A")
+
+                    }
+
+                else:
+
+                    error = "Invalid IP address or domain."
+
+            except Exception:
+
+                error = "Unable to fetch IP Intelligence data."
+
+    return render_template(
+        "ip_intelligence.html",
+        result=result,
+        error=error,
+        target=target
+    )
+
+# ================= EMAIL HEADER ANALYZER =================
+
+from email import message_from_string
+import re
+import ipaddress
+import requests
+
+@app.route("/email-header", methods=["GET", "POST"])
+def email_header():
+
+    result = None
+    error = None
+    header = ""
+
+    if request.method == "POST":
+
+        header = request.form.get("header", "").strip()
+
+        if header:
+
+            try:
+
+                msg = message_from_string(header)
+
+                received = msg.get_all("Received", [])
+
+                sender_ip = "Not Found"
+
+                for item in received:
+
+                    match = re.search(
+                        r"\[([0-9a-fA-F:.]+)\]",
+                        item
+                    )
+
+                    if match:
+
+                        try:
+
+                            ipaddress.ip_address(
+                                match.group(1)
+                            )
+
+                            sender_ip = match.group(1)
+
+                            break
+
+                        except ValueError:
+
+                            pass
+
+                authentication = msg.get(
+                    "Authentication-Results",
+                    ""
+                )
+
+                spf = "Unknown"
+                dkim = "Unknown"
+                dmarc = "Unknown"
+
+                auth = authentication.lower()
+
+                if "spf=pass" in auth:
+                    spf = "PASS"
+                elif "spf=fail" in auth:
+                    spf = "FAIL"
+
+                if "dkim=pass" in auth:
+                    dkim = "PASS"
+                elif "dkim=fail" in auth:
+                    dkim = "FAIL"
+
+                if "dmarc=pass" in auth:
+                    dmarc = "PASS"
+                elif "dmarc=fail" in auth:
+                    dmarc = "FAIL"
+
+                country = "N/A"
+                isp = "N/A"
+
+                if sender_ip != "Not Found":
+
+                    try:
+
+                        response = requests.get(
+
+                            f"http://ip-api.com/json/{sender_ip}",
+
+                            timeout=5
+
+                        )
+
+                        geo = response.json()
+
+                        if geo.get("status") == "success":
+
+                            country = geo.get(
+                                "country",
+                                "N/A"
+                            )
+
+                            isp = geo.get(
+                                "isp",
+                                "N/A"
+                            )
+
+                    except:
+
+                        pass
+                    
+                    result = {
+
+                    "From": msg.get("From", "N/A"),
+
+                    "To": msg.get("To", "N/A"),
+
+                    "Subject": msg.get("Subject", "N/A"),
+
+                    "Date": msg.get("Date", "N/A"),
+
+                    "Reply-To": msg.get("Reply-To", "N/A"),
+
+                    "Return-Path": msg.get("Return-Path", "N/A"),
+
+                    "Sender IP": sender_ip,
+
+                    "Country": country,
+
+                    "ISP": isp,
+
+                    "SPF": spf,
+
+                    "DKIM": dkim,
+
+                    "DMARC": dmarc
+
+                }
+
+            except Exception as e:
+
+                print("EMAIL HEADER ERROR:", e)
+
+                error = "Unable to analyze email header."
+
+    return render_template(
+
+        "email_header.html",
+
+        result=result,
+
+        error=error,
+
+        header=header
+
+    ) 
 # ================= RUN =================
 
 if __name__ == "__main__":

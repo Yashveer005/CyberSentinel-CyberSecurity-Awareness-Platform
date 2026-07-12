@@ -1,46 +1,255 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<div class="page-container">
+<div class="tool-card dns-tool">
 
-<h1>🌐 DNS Lookup</h1>
+    <div class="tool-header">
 
-<p class="section-subtitle">
-Find IP address of any website.
-</p>
+        <h2>🌍 DNS Lookup</h2>
 
-<div class="tool-card">
+        <p class="tool-subtitle">
+            Analyze DNS records including A, AAAA, MX, NS, TXT and CNAME records for any domain.
+        </p>
 
-<form method="POST">
+    </div>
 
-<input
-class="tool-input"
-type="text"
-name="domain"
-placeholder="example.com">
+    <form method="POST" action="/dns-lookup" id="dnsForm">
 
-<br><br>
+        <div class="search-group">
 
-<button class="tool-btn">
-Lookup
-</button>
+            <input
+                type="text"
+                class="tool-input"
+                name="domain"
+                id="domain"
+                placeholder="Enter Domain (Example: google.com)"
+                value="{{ domain }}"
+                required>
 
-</form>
+            <button
+                type="submit"
+                class="tool-btn">
 
-{% if ip %}
+                🔍 Lookup
 
-<br><br>
+            </button>
 
-<input
-class="tool-input"
-readonly
-value="{{ ip }}">
+        </div>
 
+    </form>
+
+    <div
+        id="loading"
+        class="loading-box"
+        style="display:none;">
+
+        <div class="loader"></div>
+
+        <p>Looking up DNS Records...</p>
+
+    </div>
+
+    {% if error %}
+
+    <div class="error-box">
+
+        ⚠ {{ error }}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% if records %}
+
+<div class="dns-grid">
+
+{% for record_type, values in records.items() %}
+
+<div class="dns-card">
+
+    <div class="dns-header">
+
+        <h3>
+
+        {% if record_type=="A" %}
+        🌐
+        {% elif record_type=="AAAA" %}
+        🌍
+        {% elif record_type=="MX" %}
+        📧
+        {% elif record_type=="NS" %}
+        🛰️
+        {% elif record_type=="TXT" %}
+        📄
+        {% elif record_type=="CNAME" %}
+        🔗
+        {% endif %}
+
+        {{ record_type }} Record
+
+        </h3>
+
+    </div>
+
+    {% if values %}
+
+        {% for value in values %}
+
+        <div class="dns-item">
+
+            <span>{{ value }}</span>
+
+            <button
+                type="button"
+                class="copy-btn"
+                onclick="copyText('{{ value }}')">
+
+                📋
+
+            </button>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="dns-empty">
+
+            No {{ record_type }} Record Found
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endfor %}
+
+</div>
 {% endif %}
 
-</div>
+<div class="dns-actions">
+
+    <button
+        type="button"
+        class="tool-btn"
+        onclick="copyAll()">
+
+        📋 Copy All
+
+    </button>
+
+    <button
+        type="button"
+        class="tool-btn"
+        onclick="downloadResults()">
+
+        📥 Export TXT
+
+    </button>
 
 </div>
+
+<div id="toast" class="copy-toast">
+
+    ✅ Copied Successfully
+
+</div>
+
+<script>
+
+const form = document.getElementById("dnsForm");
+const loading = document.getElementById("loading");
+
+if (form) {
+    form.addEventListener("submit", function () {
+        console.log("Form Submitted");
+        if (loading) {
+            loading.style.display = "flex";
+        }
+    });
+}
+
+function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast();
+    });
+}
+
+function copyAll() {
+
+    let text = "";
+
+    document.querySelectorAll(".dns-item span").forEach(function(item){
+        text += item.innerText + "\n";
+    });
+
+    if(text.trim() === ""){
+        alert("No DNS records available.");
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        showToast();
+    });
+}
+
+function downloadResults(){
+
+    let text = "DNS Lookup Results\n\n";
+
+    document.querySelectorAll(".dns-card").forEach(function(card){
+
+        const title = card.querySelector("h3");
+        if(title){
+            text += title.innerText + "\n";
+        }
+
+        card.querySelectorAll(".dns-item span").forEach(function(item){
+            text += "• " + item.innerText + "\n";
+        });
+
+        text += "\n";
+
+    });
+
+    if(text === "DNS Lookup Results\n\n"){
+        alert("No DNS records available.");
+        return;
+    }
+
+    const blob = new Blob([text], {type:"text/plain"});
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "dns_results.txt";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+}
+
+function showToast(){
+
+    const toast = document.getElementById("toast");
+
+    if(!toast) return;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+
+</script>
 
 {% endblock %}

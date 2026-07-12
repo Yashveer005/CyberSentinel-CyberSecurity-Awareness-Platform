@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="tool-card dns-tool">
+
+    <div class="tool-header">
+
+        <h2>📍 IP Intelligence Lookup</h2>
+
+        <p class="tool-subtitle">
+            Analyze IP addresses or domains to retrieve geolocation,
+            ISP, ASN, organization and timezone information.
+        </p>
+
+    </div>
+
+    <form method="POST" action="/ip-intelligence">
+
+        <div class="search-group">
+
+            <input
+                type="text"
+                class="tool-input"
+                name="target"
+                placeholder="Enter IP or Domain (Example: 8.8.8.8 or google.com)"
+                value="{{ target }}"
+                required>
+
+            <button
+                type="submit"
+                class="tool-btn">
+
+                🔍 Lookup
+
+            </button>
+
+        </div>
+
+    </form>
+
+    {% if error %}
+
+    <div class="error-box">
+
+        ⚠ {{ error }}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% if result %}
+
+<div class="dns-grid">
+
+{% for key, value in result.items() %}
+
+<div class="dns-card">
+
+    <div class="dns-header">
+
+        <h3>📌 {{ key }}</h3>
+
+    </div>
+
+    <div class="dns-item">
+
+        <span>{{ value }}</span>
+
+        <button
+            type="button"
+            class="copy-btn"
+            onclick="copyText('{{ value }}')">
+
+            📋
+
+        </button>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+<div class="dns-actions">
+
+</div>
+
+<div id="toast" class="copy-toast">
+
+    ✅ Copied Successfully
+
+</div>
+
+<script>
+
+function copyText(text){
+
+    navigator.clipboard.writeText(text);
+
+    showToast();
+
+}
+
+function copyAll(){
+
+    let text = "";
+
+    document.querySelectorAll(".dns-item span").forEach(function(item){
+
+        text += item.innerText + "\n";
+
+    });
+
+    navigator.clipboard.writeText(text);
+
+    showToast();
+
+}
+
+function downloadResults(){
+
+    let text = "IP Intelligence Report\n\n";
+
+    document.querySelectorAll(".dns-card").forEach(function(card){
+
+        text += card.querySelector("h3").innerText + "\n";
+
+        card.querySelectorAll(".dns-item span").forEach(function(item){
+
+            text += "• " + item.innerText + "\n";
+
+        });
+
+        text += "\n";
+
+    });
+
+    const blob = new Blob([text], {type:"text/plain"});
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "ip_intelligence_report.txt";
+
+    link.click();
+
+}
+
+function showToast(){
+
+    const toast = document.getElementById("toast");
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2000);
+
+}
+
+</script>
+
+{% endif %}
+
+{% endblock %}
