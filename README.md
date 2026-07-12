@@ -1,29 +1,121 @@
-# 🛡 CyberSentinel
+# 🛡️ CyberSentinel – Cybersecurity Awareness Platform
 
-CyberSentinel is a Cyber Security Awareness and Learning Platform developed using Python Flask.
+CyberSentinel is a web-based cybersecurity awareness and security toolkit built using Flask, Python and SQLite. It helps users learn cybersecurity concepts, practice security skills, and use practical cyber tools such as password analysis, phishing detection, DNS lookup, WHOIS lookup, IP intelligence, email header analysis and cryptographic utilities.
 
-## Features
+---
 
-- Login & Register
-- Cyber Security Quiz
-- Certificate Generation
+## ✨ Features
+
+- 👤 User Authentication
+- 📚 Cybersecurity Learning Hub
+- 📝 Interactive Quiz System
+- 🏆 Certificate Generation
+- 📊 User Dashboard
+
+### 🔐 Password Security
 - Password Strength Analyzer
-- URL Safety Checker
-- Responsive UI
+- Password Generator
 
-## Technologies
+### 🌐 Network Tools
+- URL Phishing Checker
+- DNS Lookup
+- WHOIS Lookup
+- IP Intelligence Lookup
+- Email Header Analyzer
+
+### 🔒 Cryptography
+- SHA-256 Generator
+- File Hash Checker
+
+### 🛡️ SOC Operations
+- SIEM Log Viewer (In Progress)
+- SIEM Dashboard (Planned)
+- MITRE ATT&CK Mapper (Planned)
+- Incident Case Management (Planned)
+- Investigation Report Generator (Planned)
+
+---
+
+## 🛠️ Tech Stack
 
 - Python
 - Flask
-- HTML
-- CSS
-- JavaScript
 - SQLite
+- HTML5
+- CSS3
+- JavaScript
 
-## Developer
+---
 
-Yashveer Singh
+## 🚀 Installation
 
-## Version
+```bash
+git clone https://github.com/Yashveer005/CyberSentinel-CyberSecurity-Awareness-Platform.git
 
-v3.0 (In Development)
+cd CyberSentinel-CyberSecurity-Awareness-Platform
+
+pip install -r requirements.txt
+
+python app.py
+```
+
+Open your browser:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+## 📂 Project Structure
+
+```
+CyberSentinel/
+│
+├── templates/
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── uploads/
+├── app.py
+├── create_db.py
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
+---
+
+## 📸 Screenshots
+
+Screenshots will be added after the final release of the project.
+
+---
+
+## 📌 Future Enhancements
+
+- SIEM Dashboard
+- MITRE ATT&CK Mapping
+- Incident Case Management
+- Investigation Report Generator
+- QR Code Analyzer
+- File Metadata Viewer
+
+---
+
+## 👨‍💻 Author
+
+**Yashveer Singh**
+
+GitHub:
+https://github.com/Yashveer005
+
+LinkedIn:
+https://www.linkedin.com/in/yashveer-singh-7a0b32347
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
