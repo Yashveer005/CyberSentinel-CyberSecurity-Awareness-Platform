@@ -19,6 +19,7 @@ import dns.resolver
 import whois
 import requests
 import ipaddress
+
 app = Flask(__name__)
 app.secret_key = "CyberSentinel_2026"
 
@@ -1114,9 +1115,6 @@ def ip_intelligence():
 # ================= EMAIL HEADER ANALYZER =================
 
 from email import message_from_string
-import re
-import ipaddress
-import requests
 
 @app.route("/email-header", methods=["GET", "POST"])
 def email_header():
