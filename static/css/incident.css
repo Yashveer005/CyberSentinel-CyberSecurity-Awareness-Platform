@@ -1,0 +1,541 @@
+/* ==========================================================
+   INCIDENT CASE MANAGEMENT
+   CyberSentinel
+========================================================== */
+
+.incident-page{
+
+    max-width:1400px;
+
+    margin:40px auto;
+
+    padding:20px;
+
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.incident-header{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+}
+
+.incident-header h1{
+
+    font-size:46px;
+
+    color:#00e5ff;
+
+    margin-bottom:15px;
+
+    text-shadow:0 0 20px rgba(0,229,255,.45);
+
+}
+
+.incident-header p{
+
+    color:#cfd8dc;
+
+    font-size:18px;
+
+    max-width:850px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+}
+
+/* ==========================
+   DASHBOARD STATS
+========================== */
+
+.incident-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.incident-stat-card{
+
+    background:linear-gradient(
+        145deg,
+        rgba(18,35,90,.85),
+        rgba(10,20,55,.95)
+    );
+
+    border:1px solid rgba(0,229,255,.25);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    backdrop-filter:blur(15px);
+
+    transition:.35s ease;
+
+}
+
+.incident-stat-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#00e5ff;
+
+    box-shadow:
+    0 0 30px rgba(0,229,255,.35);
+
+}
+
+.incident-stat-card h2{
+
+    font-size:46px;
+
+    color:#00e5ff;
+
+    margin-bottom:10px;
+
+}
+
+.incident-stat-card p{
+
+    color:#ffffff;
+
+    font-size:17px;
+
+}
+/* ==========================
+   FORM CARD
+========================== */
+
+.incident-form-card{
+
+    background:rgba(15,25,60,.75);
+
+    border:1px solid rgba(0,229,255,.25);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    backdrop-filter:blur(16px);
+
+    box-shadow:0 0 30px rgba(0,229,255,.15);
+
+    margin-bottom:40px;
+
+}
+
+.incident-form-card h2{
+
+    color:#00e5ff;
+
+    margin-bottom:25px;
+
+    text-align:center;
+
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.incident-form{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px;
+
+}
+
+.incident-form input,
+.incident-form select,
+.incident-form textarea{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.06);
+
+    color:#4f4d4d;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.incident-form input:focus,
+.incident-form select:focus,
+.incident-form textarea:focus{
+
+    border-color:#00e5ff;
+
+    box-shadow:0 0 18px rgba(0,229,255,.30);
+
+}
+
+.incident-form textarea{
+
+    grid-column:1/3;
+
+    resize:vertical;
+
+    min-height:150px;
+
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.incident-btn{
+
+    grid-column:1/3;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(90deg,#00e5ff,#00ff99);
+
+    color:#081b29;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.incident-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 25px rgba(0,229,255,.45);
+
+}
+/* ==========================
+   TABLE CARD
+========================== */
+
+.incident-table-card{
+
+    background:rgba(15,25,60,.75);
+
+    border:1px solid rgba(0,229,255,.25);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    backdrop-filter:blur(16px);
+
+    box-shadow:0 0 30px rgba(0,229,255,.15);
+
+    overflow-x:auto;
+
+}
+
+.incident-table-card h2{
+
+    color:#00e5ff;
+
+    margin-bottom:25px;
+
+    text-align:center;
+
+}
+
+/* ==========================
+   TABLE
+========================== */
+
+.incident-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1000px;
+
+}
+
+.incident-table thead{
+
+    background:rgba(0,229,255,.12);
+
+}
+
+.incident-table th{
+
+    padding:18px;
+
+    color:#00e5ff;
+
+    font-size:15px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    border-bottom:1px solid rgba(0,229,255,.25);
+
+}
+
+.incident-table td{
+
+    padding:18px;
+
+    color:#ffffff;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+}
+
+.incident-table tbody tr{
+
+    transition:.3s;
+
+}
+
+.incident-table tbody tr:hover{
+
+    background:rgba(255,255,255,.04);
+
+}
+
+.incident-table tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+/* ==========================
+   SEVERITY BADGES
+========================== */
+
+.badge{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.badge.low{
+
+    background:#16a34a;
+
+}
+
+.badge.medium{
+
+    background:#f59e0b;
+
+}
+
+.badge.high{
+
+    background:#ef4444;
+
+}
+
+.badge.critical{
+
+    background:#991b1b;
+
+    box-shadow:0 0 15px rgba(255,0,0,.45);
+
+}
+
+/* ==========================
+   STATUS BADGES
+========================== */
+
+.status{
+
+    display:inline-block;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.status.open{
+
+    background:#dc2626;
+
+}
+
+.status.progress{
+
+    background:#2563eb;
+
+}
+
+.status.resolved{
+
+    background:#16a34a;
+
+}
+
+/* ==========================
+   ACTION BUTTONS
+========================== */
+
+.incident-action-btn,
+.incident-delete-btn{
+
+    display:inline-block;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+    margin:3px;
+
+}
+
+.incident-action-btn{
+
+    background:#00e5ff;
+
+    color:#081b29;
+
+}
+
+.incident-action-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 0 15px rgba(0,229,255,.45);
+
+}
+
+.incident-delete-btn{
+
+    background:#dc2626;
+
+    color:#fff;
+
+}
+
+.incident-delete-btn:hover{
+
+    background:#b91c1c;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+   EMPTY STATE
+========================== */
+
+.incident-table td[colspan]{
+
+    padding:45px;
+
+    color:#b9d9ff;
+
+    font-size:18px;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+    .incident-form{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .incident-form textarea,
+
+    .incident-btn{
+
+        grid-column:auto;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .incident-header h1{
+
+        font-size:34px;
+
+    }
+
+    .incident-table-card{
+
+        padding:20px;
+
+    }
+
+    .incident-stat-card h2{
+
+        font-size:34px;
+
+    }
+
+}

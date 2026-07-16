@@ -1,0 +1,433 @@
+/* ==========================================================
+   WHOIS LOOKUP
+========================================================== */
+
+.whois-tool{
+
+    max-width:1100px;
+
+    margin:40px auto;
+
+}
+
+.tool-card{
+
+    background:rgba(12,20,55,.92);
+
+    border:1px solid rgba(0,255,255,.20);
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:0 0 30px rgba(0,255,255,.15);
+
+    backdrop-filter:blur(16px);
+
+}
+
+.tool-header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.tool-header h2{
+
+    color:#fff;
+
+    font-size:48px;
+
+    margin-bottom:15px;
+
+}
+
+.tool-subtitle{
+
+    color:#cfe8ff;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    max-width:750px;
+
+    margin:auto;
+
+}
+
+.search-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-top:30px;
+
+}
+
+.tool-input{
+
+    flex:1;
+
+    min-width:320px;
+
+    padding:18px 22px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:16px;
+
+    background:#132f70;
+
+    color:white;
+
+    font-size:18px;
+
+    transition:.3s;
+
+}
+
+.tool-input::placeholder{
+
+    color:#b9d9ff;
+
+}
+
+.tool-input:focus{
+
+    box-shadow:0 0 20px cyan;
+
+}
+
+.tool-btn{
+
+    padding:18px 35px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    background:linear-gradient(90deg,#00e5ff,#00ff99);
+
+    color:#06293a;
+
+    transition:.3s;
+
+}
+
+.tool-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 0 25px cyan;
+
+}
+
+.loading-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.loader{
+
+    width:60px;
+
+    height:60px;
+
+    border:6px solid rgba(255,255,255,.12);
+
+    border-top:6px solid cyan;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+.loading-box p{
+
+    color:white;
+
+    margin-top:20px;
+
+    font-size:18px;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.error-box{
+
+    margin-top:30px;
+
+    padding:18px;
+
+    background:#471414;
+
+    color:#ffd4d4;
+
+    border:1px solid red;
+
+    border-radius:14px;
+
+    text-align:center;
+
+}
+
+.whois-grid{
+
+    max-width:1200px;
+
+    margin:35px auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:25px;
+
+}
+
+.whois-card{
+
+    background:rgba(12,20,55,.92);
+
+    border:1px solid rgba(0,255,255,.18);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    transition:.35s;
+
+    box-shadow:0 0 20px rgba(0,255,255,.12);
+
+}
+
+.whois-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#00e5ff;
+
+    box-shadow:0 0 30px rgba(0,255,255,.35);
+
+}
+
+.whois-header{
+
+    padding-bottom:15px;
+
+    margin-bottom:18px;
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+
+}
+
+.whois-header h3{
+
+    color:#00e5ff;
+
+    font-size:24px;
+
+    text-align:center;
+
+}
+
+.whois-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:12px 0;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    background:#163a82;
+
+    color:white;
+
+    word-break:break-word;
+
+}
+
+.whois-item span{
+
+    flex:1;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+}
+
+.copy-btn{
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    background:#00e5ff;
+
+    color:#06293a;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.copy-btn:hover{
+
+    background:#00ff99;
+
+    transform:scale(1.05);
+
+}
+
+.whois-empty{
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#b9d9ff;
+
+}
+
+.whois-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin:40px 0;
+
+}
+
+.copy-toast{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#00ff99;
+
+    color:#052b36;
+
+    padding:15px 22px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    box-shadow:0 0 20px rgba(0,255,153,.35);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.copy-toast.show{
+
+    opacity:1;
+
+}
+
+@media(max-width:768px){
+
+    .tool-card{
+
+        padding:28px;
+
+        margin:20px;
+
+    }
+
+    .tool-header h2{
+
+        font-size:34px;
+
+    }
+
+    .tool-input{
+
+        min-width:100%;
+
+    }
+
+    .tool-btn{
+
+        width:100%;
+
+    }
+
+    .whois-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .whois-actions{
+
+        flex-direction:column;
+
+    }
+
+}

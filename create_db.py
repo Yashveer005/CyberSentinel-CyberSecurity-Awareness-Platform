@@ -20,6 +20,19 @@ CREATE TABLE IF NOT EXISTS users (
     certificates INTEGER DEFAULT 0
 )
 """)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS incidents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    incident_id TEXT UNIQUE,
+    title TEXT NOT NULL,
+    severity TEXT NOT NULL,
+    category TEXT NOT NULL,
+    description TEXT NOT NULL,
+    status TEXT DEFAULT 'Open',
+    assigned_to TEXT,
+    created_at TEXT
+)
+""")
 
 # ==========================
 # QUESTIONS TABLE
@@ -267,6 +280,7 @@ if count == 0:
     (question, option1, option2, option3, option4, answer)
     VALUES (?, ?, ?, ?, ?, ?)
     """, questions)
+
 
 conn.commit()
 conn.close()

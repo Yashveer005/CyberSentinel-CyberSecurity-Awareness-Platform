@@ -1,0 +1,148 @@
+/* ==========================================================
+   20. QUIZ
+========================================================== */
+
+.quiz-container{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:40px 20px;
+
+}
+
+.quiz-card{
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+}
+
+.timer{
+
+    color:var(--primary);
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ==========================================================
+   21. RESULT
+========================================================== */
+
+.result-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:80px;
+
+}
+
+.result-card{
+
+    width:550px;
+
+    padding:40px;
+
+    text-align:center;
+
+}
+
+.big-score{
+
+    font-size:48px;
+
+    color:var(--primary);
+
+}
+
+
+/* ==========================================================
+   22. CERTIFICATE
+========================================================== */
+
+.certificate-wrapper{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:70px auto;
+
+}
+
+.certificate-card{
+
+    width:900px;
+
+    padding:60px;
+
+    background:
+    linear-gradient(135deg,#ffffff,#eef8ff);
+
+    color:#081b29;
+
+    border-radius:22px;
+
+    border:8px solid var(--primary);
+
+    box-shadow:0 0 40px rgba(0,229,255,.35);
+
+    text-align:center;
+
+}
+
+.cert-logo{
+
+    font-size:40px;
+
+    font-weight:bold;
+
+}
+
+.logo-cyber{
+
+    color:var(--primary);
+
+}
+
+.logo-sentinel{
+
+    color:var(--secondary);
+
+}
+
+.cert-name{
+
+    margin:25px 0;
+
+    font-size:36px;
+
+    color:#0077ff;
+
+}
+
+.cert-score{
+
+    margin-top:20px;
+
+    font-size:24px;
+
+}
+
+.cert-footer{
+
+    margin-top:35px;
+
+    font-size:14px;
+
+}

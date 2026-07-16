@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-{% block content %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tools.css') }}">
+{% endblock %}
+
+{% block content %}
 <div class="page-container">
 
     <h1>🛠 Cyber Security Toolkit</h1>
@@ -87,12 +91,13 @@
     <div class="tools-grid">
 
         <div class="tool-card">
-            <h3>📊 SIEM Log Viewer</h3>
-            <p>Analyze log files and detect suspicious activities including failed logins,
-                SQL Injection, XSS and other threats.</p>
-            <a href="/siem-logs" class="tool-btn">Open Tool</a>
+             <h3>🚨 Incident Case Management</h3>
+             <p>Create, manage and track cybersecurity incidents with severity,
+             status and investigation details.</p>
+             <a href="/incidents" class="tool-btn">Open Tool </a>
+        </div>
 
-            
+    
         </div>
     </div>
 </div>

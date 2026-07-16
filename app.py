@@ -931,7 +931,7 @@ def tools():
 @app.route("/learning")
 def learning():
 
-    return render_template("learning.html")
+    return render_template("learning/learning.html")
 
 # ================= ABOUT =================
 
@@ -1264,6 +1264,146 @@ def email_header():
         header=header
 
     ) 
+# ================= INCIDENT CASE MANAGEMENT =================
+
+@app.route("/incidents", methods=["GET", "POST"])
+def incidents():
+
+    conn = sqlite3.connect("database.db")
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # ================= CREATE INCIDENT =================
+
+    if request.method == "POST":
+
+        incident_id = "INC-" + str(uuid.uuid4())[:8].upper()
+
+        title = request.form["title"]
+        severity = request.form["severity"]
+        category = request.form["category"]
+        description = request.form["description"]
+        assigned_to = request.form["assigned_to"]
+
+        created_at = datetime.now().strftime("%d-%m-%Y %H:%M")
+
+        cursor.execute("""
+            INSERT INTO incidents
+            (
+                incident_id,
+                title,
+                severity,
+                category,
+                description,
+                status,
+                assigned_to,
+                created_at
+            )
+            VALUES (?,?,?,?,?,?,?,?)
+        """,(
+            incident_id,
+            title,
+            severity,
+            category,
+            description,
+            "Open",
+            assigned_to,
+            created_at
+        ))
+
+        conn.commit()
+
+    # ================= INCIDENT LIST =================
+
+    cursor.execute("""
+        SELECT *
+        FROM incidents
+        ORDER BY id DESC
+    """)
+
+    incidents = cursor.fetchall()
+
+    # ================= DASHBOARD COUNTS =================
+
+    cursor.execute("SELECT COUNT(*) FROM incidents")
+    total = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM incidents WHERE status='Open'")
+    open_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM incidents WHERE status='In Progress'")
+    progress_count = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM incidents WHERE status='Resolved'")
+    resolved_count = cursor.fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+        "incidents.html",
+        incidents=incidents,
+        total=total,
+        open_count=open_count,
+        progress_count=progress_count,
+        resolved_count=resolved_count
+    )
+
+
+# ================= UPDATE INCIDENT =================
+
+@app.route("/incident/update/<int:id>")
+def update_incident(id):
+
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT status
+        FROM incidents
+        WHERE id=?
+    """,(id,))
+
+    status = cursor.fetchone()[0]
+
+    if status == "Open":
+        new_status = "In Progress"
+
+    elif status == "In Progress":
+        new_status = "Resolved"
+
+    else:
+        new_status = "Open"
+
+    cursor.execute("""
+        UPDATE incidents
+        SET status=?
+        WHERE id=?
+    """,(new_status,id))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/incidents")
+
+
+# ================= DELETE INCIDENT =================
+
+@app.route("/incident/delete/<int:id>")
+def delete_incident(id):
+
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        DELETE FROM incidents
+        WHERE id=?
+    """,(id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/incidents")
+
 # ================= RUN =================
 
 if __name__ == "__main__":

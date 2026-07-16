@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/learning.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="learning-page">
+
+    <div class="lesson-header">
+
+        <h1>{{ lesson.icon }} {{ lesson.title }}</h1>
+
+        <p>{{ lesson.subtitle }}</p>
+
+    </div>
+
+    {% for section in lesson.sections %}
+
+    <div class="lesson-card">
+
+        <h2>{{ section.heading }}</h2>
+
+        <p>{{ section.content }}</p>
+
+    </div>
+
+    {% endfor %}
+
+    <div class="lesson-actions">
+
+        {% if previous %}
+        <a href="/learning/{{ previous }}" class="btn-secondary">
+            ← Previous
+        </a>
+        {% endif %}
+
+        {% if next %}
+        <a href="/learning/{{ next }}" class="btn-primary">
+            Next →
+        </a>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

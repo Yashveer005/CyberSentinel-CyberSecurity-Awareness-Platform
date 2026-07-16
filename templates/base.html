@@ -5,7 +5,11 @@
     <title>CyberSentinel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Common CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Page Specific CSS -->
+    {% block extra_css %}
+    {% endblock %}
 </head>
 
 <body>
@@ -13,10 +17,10 @@
 <nav class="navbar">
     <div class="nav-links">
         <a href="/" class="{% if request.path=='/' %}active{% endif %}">Home</a>
-        
+
         {% if session.get("user_id") %}
             <a href="/dashboard" class="{% if 'dashboard' in request.path %}active{% endif %}">Dashboard</a>
-            
+
             <a href="/tools" class="{% if 'tools' in request.path %}active{% endif %}">Cyber Tools</a>
 
             <a href="/learning" class="{% if 'learning' in request.path %}active{% endif %}">Learning Hub</a>
@@ -29,9 +33,8 @@
         {% else %}
             <a href="/login">Login</a>
             <a href="/register">Register</a>
-         {% endif %}
+        {% endif %}
     </div>
-             
 </nav>
 
 <div class="main-content">
@@ -44,27 +47,25 @@
         <span class="cyber">Cyber</span><span class="sentinel">Sentinel</span>
     </h3>
 
-    <p>
-        Learn • Practice • Protect
-    </p>
+    <p>Learn • Practice • Protect</p>
 
-    <small>
-        Built with ❤️ using Flask, Python & SQLite
-    </small>
+    <small>Built with ❤️ using Flask, Python & SQLite</small>
 
     <br><br>
 
-    <small>
-        © 2026 CyberSentinel | Cyber Awareness Platform
-    </small>
+    <small>© 2026 CyberSentinel | Cyber Awareness Platform</small>
 
 </footer>
 
 <script>
-window.addEventListener("scroll", function() {
+window.addEventListener("scroll", function () {
     document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 20);
 });
 </script>
+
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+{% block extra_js %}{% endblock %}
+
 </body>
 </html>

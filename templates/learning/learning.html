@@ -1,0 +1,472 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Hub{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/learning.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="learning-page">
+
+<div class="lesson-header">
+
+<h1>📚 Cyber Security Learning Hub</h1>
+
+<p>
+
+Master Cyber Security step by step through
+interactive lessons, practical concepts,
+career roadmaps and quizzes.
+
+</p>
+
+</div>
+
+<div class="learning-progress">
+
+<div class="progress-info">
+
+<h3>🎓 Your Learning Journey</h3>
+
+<p>
+
+Complete modules to earn XP,
+unlock certificates and become job ready.
+
+</p>
+
+</div>
+
+<div class="progress-bar">
+
+<div class="progress-fill"></div>
+
+</div>
+
+<p class="progress-text">
+
+0 / 18 Modules Completed
+
+</p>
+
+</div>
+
+<div class="learning-stats">
+
+<div class="learning-stat-card">
+
+<h2>18</h2>
+
+<p>Modules</p>
+
+</div>
+
+<div class="learning-stat-card">
+
+<h2>3</h2>
+
+<p>Difficulty Levels</p>
+
+</div>
+
+<div class="learning-stat-card">
+
+<h2>0 XP</h2>
+
+<p>Knowledge Earned</p>
+
+</div>
+
+<div class="learning-stat-card">
+
+<h2>8+</h2>
+
+<p>Learning Hours</p>
+
+</div>
+
+</div>
+
+<div class="learning-search">
+
+<input
+type="text"
+placeholder="🔍 Search Cyber Security Topics...">
+
+<select>
+
+<option>All Levels</option>
+
+<option>Beginner</option>
+
+<option>Intermediate</option>
+
+<option>Advanced</option>
+
+</select>
+
+</div>
+<!-- ================= BEGINNER ================= -->
+
+<h2 class="tool-category">🟢 Beginner Level</h2>
+
+<div class="learning-grid">
+
+    <div class="learning-card">
+
+        <h3>🛡 Cyber Security Basics</h3>
+
+        <p>
+            Learn the fundamentals of cybersecurity,
+            CIA Triad, common cyber threats and basic concepts.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🎣 Phishing Awareness</h3>
+
+        <p>
+            Identify phishing emails,
+            fake websites and modern online scams.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🔐 Password Security</h3>
+
+        <p>
+            Learn strong passwords,
+            MFA, password managers and account protection.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🌐 Safe Internet Browsing</h3>
+
+        <p>
+            Browse securely,
+            avoid malicious websites and stay protected online.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🦠 Malware Fundamentals</h3>
+
+        <p>
+            Learn about viruses,
+            worms, trojans, spyware and ransomware.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>📱 Mobile Security</h3>
+
+        <p>
+            Secure Android and iPhone devices
+            from malware, scams and data theft.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+</div>
+<!-- ================= INTERMEDIATE ================= -->
+
+<h2 class="tool-category">🟡 Intermediate Level</h2>
+
+<div class="learning-grid">
+
+    <div class="learning-card">
+
+        <h3>🌍 Networking Basics</h3>
+
+        <p>
+            Learn IP Address, DNS, Ports, Protocols,
+            OSI Model and TCP/IP fundamentals.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🔥 Firewalls</h3>
+
+        <p>
+            Understand packet filtering,
+            stateful firewalls, NGFW and access control.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🔒 Encryption & Hashing</h3>
+
+        <p>
+            Learn symmetric encryption,
+            asymmetric encryption, hashing and digital signatures.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>👨‍💻 Social Engineering</h3>
+
+        <p>
+            Learn phishing, vishing, smishing,
+            baiting, pretexting and tailgating attacks.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🔑 Authentication & MFA</h3>
+
+        <p>
+            Learn authentication methods,
+            Multi-Factor Authentication and Zero Trust basics.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>📡 DNS & Web Security</h3>
+
+        <p>
+            Understand DNS lookup,
+            HTTPS, SSL/TLS certificates and secure browsing.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+</div>
+<!-- ================= ADVANCED ================= -->
+
+<h2 class="tool-category">🔴 Advanced Level</h2>
+
+<div class="learning-grid">
+
+    <div class="learning-card">
+
+        <h3>💉 SQL Injection</h3>
+
+        <p>
+            Understand SQL Injection attacks, exploitation methods and secure coding practices to prevent them.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>⚡ Cross Site Scripting (XSS)</h3>
+
+        <p>
+            Learn Reflected, Stored and DOM-based XSS attacks with prevention techniques.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🛡 Incident Response</h3>
+
+        <p>
+            Learn how SOC teams detect, investigate, contain and recover from cyber incidents.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>☁️ Cloud Security</h3>
+
+        <p>
+            Learn cloud security fundamentals, shared responsibility model and cloud best practices.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Start Learning →
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ================= CAREER PATHS ================= -->
+
+<h2 class="tool-category">💼 Cybersecurity Career Paths</h2>
+
+<div class="learning-grid">
+
+    <div class="learning-card">
+
+        <h3>🖥 SOC Analyst</h3>
+
+        <p>
+            Learn the roadmap, required skills, certifications and tools for becoming a SOC Analyst.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Explore →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🕵 Penetration Tester</h3>
+
+        <p>
+            Understand penetration testing methodologies, tools and ethical hacking concepts.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Explore →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🎯 Bug Bounty Hunter</h3>
+
+        <p>
+            Learn responsible disclosure, vulnerability hunting and bug bounty platforms.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Explore →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>☁️ Cloud Security Engineer</h3>
+
+        <p>
+            Explore AWS, Azure and cloud security career opportunities and learning roadmap.
+        </p>
+
+        <a href="#" class="learn-btn">
+            Explore →
+        </a>
+
+    </div>
+
+</div>
+
+<!-- ================= QUIZ ================= -->
+
+<h2 class="tool-category">🏆 Practice & Certification</h2>
+
+<div class="learning-grid">
+
+    <div class="learning-card">
+
+        <h3>📝 Cyber Quiz Zone</h3>
+
+        <p>
+            Test your knowledge with interactive quizzes and improve your cybersecurity skills.
+        </p>
+
+        <a href="/quiz" class="learn-btn">
+            Start Quiz →
+        </a>
+
+    </div>
+
+    <div class="learning-card">
+
+        <h3>🎖 Earn Certificate</h3>
+
+        <p>
+            Complete quizzes successfully and unlock your CyberSentinel achievement certificate.
+        </p>
+
+        <a href="/certificate" class="learn-btn">
+            View Certificate →
+        </a>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+
+{% block title %}Incident Case Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/incident.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="incident-page">
+
+    <!-- Header -->
+    <div class="incident-header">
+
+        <h1>🚨 Incident Case Management</h1>
+
+        <p>
+            Create, track and investigate cybersecurity incidents with a professional SOC workflow.
+        </p>
+
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="incident-stats">
+
+        <div class="incident-stat-card">
+            <h2>{{ total }}</h2>
+            <p>Total Incidents</p>
+        </div>
+
+        <div class="incident-stat-card">
+            <h2>{{ open_count }}</h2>
+            <p>Open</p>
+        </div>
+
+        <div class="incident-stat-card">
+            <h2>{{ progress_count }}</h2>
+            <p>In Progress</p>
+        </div>
+
+        <div class="incident-stat-card">
+            <h2>{{ resolved_count }}</h2>
+            <p>Resolved</p>
+        </div>
+
+    </div>
+
+    <!-- Create Incident -->
+    <div class="incident-form-card">
+
+        <h2>Create New Incident</h2>
+
+        <form method="POST" class="incident-form">
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Incident Title"
+                required>
+
+            <select name="severity" required>
+
+                <option value="">Select Severity</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+                <option>Critical</option>
+
+            </select>
+
+            <select name="category" required>
+
+                <option value="">Select Category</option>
+
+                <option>Phishing</option>
+                <option>Malware</option>
+                <option>Brute Force</option>
+                <option>DDoS</option>
+                <option>Unauthorized Access</option>
+                <option>Data Leak</option>
+                <option>Other</option>
+
+            </select>
+
+            <input
+                type="text"
+                name="assigned_to"
+                placeholder="Assigned To">
+
+            <textarea
+                name="description"
+                rows="5"
+                placeholder="Incident Description"
+                required></textarea>
+
+            <button type="submit" class="incident-btn">
+                ➕ Create Incident
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Incident Table -->
+
+    <div class="incident-table-card">
+
+        <h2>Incident Records</h2>
+
+        <table class="incident-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Severity</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Assigned To</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for incident in incidents %}
+
+                <tr>
+
+                    <td>{{ incident.incident_id }}</td>
+
+                    <td>{{ incident.title }}</td>
+
+                    <td>
+
+                        {% if incident.severity=="Critical" %}
+                        <span class="badge critical">Critical</span>
+
+                        {% elif incident.severity=="High" %}
+                        <span class="badge high">High</span>
+
+                        {% elif incident.severity=="Medium" %}
+                        <span class="badge medium">Medium</span>
+
+                        {% else %}
+                        <span class="badge low">Low</span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ incident.category }}</td>
+
+                    <td>
+
+                        {% if incident.status=="Open" %}
+                        <span class="status open">Open</span>
+
+                        {% elif incident.status=="In Progress" %}
+                        <span class="status progress">In Progress</span>
+
+                        {% else %}
+                        <span class="status resolved">Resolved</span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ incident.assigned_to }}</td>
+
+                    <td>{{ incident.created_at }}</td>
+
+                    <td>
+
+                        <a href="/incident/update/{{ incident.id }}"
+                           class="incident-action-btn">
+                            Update
+                        </a>
+
+                        <a href="/incident/delete/{{ incident.id }}"
+                           class="incident-delete-btn"
+                           onclick="return confirm('Delete this incident?')">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% else %}
+
+                <tr>
+
+                    <td colspan="8">
+
+                        🚨 No incidents found.
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block content %}
 
 <!-- ===== HERO SECTION ===== -->
@@ -84,7 +89,7 @@
     <div class="stats-grid">
 
         <div class="stat-card">
-            <h2>12+</h2>
+            <h2>10+</h2>
             <p>Security Tools</p>
         </div>
 
@@ -160,6 +165,49 @@
 <section class="learning container">
 
     <h2>📚 Learning Hub</h2>
+
+    <div class="learning-progress">
+         <div class="learning-progress">
+        <div class="learning-stats">
+            <div class="learning-stat-card">
+                <h2>8</h2>
+                <p>Total Modules</p>
+            </div>
+            
+            <div class="learning-stat-card">
+                <h2>0</h2>
+                <p>Completed</p>
+            </div>
+            
+            <div class="learning-stat-card">
+                <h2>0 XP</h2>
+                <p>Knowledge Earned</p>
+            </div>
+            
+            <div class="learning-stat-card">
+                <h2>6 Hrs</h2>
+                <p>Estimated Time</p>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:0%;"></div>
+        </div>
+        
+        <p class="progress-text">
+            0 / 8 Modules Completed
+        </p>
+    </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" style="width:0%;"></div>
+        </div>
+        
+        <p class="progress-text">
+            0 / 8 Modules Completed
+        </p>
+    </div>
+
     <div class="title-divider">
         <span></span>
         <i class="fas fa-shield-alt"></i>
@@ -175,27 +223,52 @@
     <div class="learning-grid">
 
         <div class="learning-card">
-            <h3>🎣 Phishing Awareness</h3>
-            <p>Learn how to identify phishing emails and fake websites.</p>
-            <a href="#" class="learn-btn">Explore →</a>
+            <h3>🛡 Cyber Basics</h3>
+            <p>Learn cybersecurity fundamentals, CIA Triad,
+                common threats and essential concepts.</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
         </div>
 
         <div class="learning-card">
-            <h3>🚨 Scam Alerts</h3>
-            <p>Stay updated with the latest online scams and frauds.</p>
-            <a href="#" class="learn-btn">Explore →</a>
+            <h3>🎣Phishing Awareness</h3>
+            <p>Learn how phishing attacks work and how to identify fake emails and websites.</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
         </div>
 
         <div class="learning-card">
-            <h3>💡 Daily Security Tips</h3>
-            <p>Small daily tips to improve your cybersecurity habits.</p>
-            <a href="#" class="learn-btn">Explore →</a>
+            <h3>🔐Password Security</h3>
+            <p>understand strong passwords, MFA, password managers and account security..</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
         </div>
 
         <div class="learning-card">
-            <h3>📖 Cyber Basics</h3>
-            <p>Start learning networking, passwords and cyber concepts.</p>
-            <a href="#" class="learn-btn">Explore →</a>
+            <h3>🦠Malware</h3>
+            <p>Learn about viruses, worms, trojans, ransomware and spyware</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>🌐Network Security</h3>
+            <p>Learn about networking, firewalls, IP Address, DNS, VPNs and secure communication.</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>👥Social Engineering</h3>
+            <p>Understand physchologiacal attacks like baiting, pretexting, tailgaiting and impersonation</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>📱Mobile Security</h3>
+            <p>Protect Android and iPhone devicesfrom malware, scams, unsafe appsand data thefts.</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
+        </div>
+
+        <div class="learning-card">
+            <h3>❓Cyber Quiz Zone</h3>
+            <p>Test your cybersecurity knowledge with our interactive quizzes and challenges.</p>
+            <a href="#" class="learn-btn">Start Learning →</a>
         </div>
 
     </div>
